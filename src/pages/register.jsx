@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form"
 import { axiosInstance } from "../client/api"
 import userStore from "../store/user"
 
-export default function Register() {
+const Register =() => {
     const  {register , getValues , handleSubmit} = useForm()
 const {login , logOut} = userStore()
  
@@ -44,3 +44,4 @@ const onSubmit = async() => {
     </div>
   )
 }
+export default Register;

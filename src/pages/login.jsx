@@ -12,7 +12,7 @@ const schema = vine.compile(
   })
 )
 
-export default function Login() {
+const Login = () => {
 const  {register , getValues , handleSubmit,formState} = useForm({
   resolver:vineResolver(schema)
 })
@@ -51,3 +51,4 @@ console.log(formState.errors)
     </div>
   )
 }
+export default  Login

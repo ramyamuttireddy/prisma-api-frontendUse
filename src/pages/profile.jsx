@@ -1,9 +1,10 @@
 
 
-export default function Profile() {
+const Profile = () => {
   return (
     <div>
       <div>Profile Page</div>
     </div>
   )
 }
+export default  Profile
