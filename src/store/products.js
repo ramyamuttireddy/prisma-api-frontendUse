@@ -14,7 +14,7 @@ const useStore = create(
           set(cartItems);
         },
 
-        incrementCartItems: (id, name, price, quility, image) => {
+        incrementCartItems: (id, name, price, quantity, image) => {
           console.log("item");
           const { cart } = get();
           const existingCardItem = cart.find(
@@ -25,7 +25,7 @@ const useStore = create(
               if (cartItem.productId === id) {
                 return {
                   ...cartItem,
-                  quility: cartItem.quility + 1,
+                  quantity: cartItem.quantity + 1,
                 };
               }
               return cartItem;
@@ -49,10 +49,10 @@ const useStore = create(
         decrementCartItems: (id) => {
           const { cart } = get();
           const updatedCart = cart.map((cartItem) => {
-            if (cartItem.productId === id && cartItem.quility > 0) {
+            if (cartItem.productId === id && cartItem.quantity > 0) {
               return {
                 ...cartItem,
-                quility: Math.max(cartItem.quility - 1, 0),
+                quantity: Math.max(cartItem.quantity - 1, 0),
               };
             }
             return cartItem;
@@ -64,7 +64,7 @@ const useStore = create(
         getTotalPrice: () => {
           const { cart } = get();
           const totalPrice = cart.reduce((sum, element) => {
-            return (sum += element.price * element.quility);
+            return (sum += element.price * element.quantity);
           }, 0);
 
           return totalPrice;
@@ -73,7 +73,7 @@ const useStore = create(
         getTotalCartItemsCount: () => {
           const { cart } = get();
           const totalCount = cart.reduce((sum, element) => {
-            return (sum += element.quility);
+            return (sum += element.quantity);
           }, 0);
 
           return totalCount;

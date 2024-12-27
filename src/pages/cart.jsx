@@ -14,7 +14,7 @@ const Cart = () => {
           return (
             <div key={cartItem.cartId}>
               <p>{cartItem.name}</p>
-              <p>{cartItem.price}</p>$ {cartItem.quility} <br />
+              <p>{cartItem.price}</p>$ {cartItem.quantity} <br />
               <img src={cartItem.image} alt="" className="w-40 h-40" />
               <button
                 onClick={() => {

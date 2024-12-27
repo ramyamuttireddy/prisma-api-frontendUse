@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import Product from "../pages/products";
 import LayOut from "../Layout";
 import Shipping from "./shipping";
+import Checkout from "./checkout";
 
 const ProtectRoute = (props) => {
   const { user } = userStore();
@@ -47,6 +48,14 @@ const AppRouter = () => {
             element={
               <ProtectRoute>
                <Shipping />
+              </ProtectRoute>
+            }
+          />
+           <Route
+            path="/checkout"
+            element={
+              <ProtectRoute>
+               <Checkout />
               </ProtectRoute>
             }
           />

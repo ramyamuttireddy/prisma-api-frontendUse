@@ -1,9 +1,9 @@
-import { useForm } from "react-hook-form";
-import useStore from "../store/products";
-import vine from "@vinejs/vine";
 import { vineResolver } from "@hookform/resolvers/vine";
+import { useForm } from "react-hook-form";
+import vine from "@vinejs/vine";
 import { axiosInstance } from "../client/api";
-import { useEffect } from "react";
+import useStore from "../store/products";
+import { useNavigate } from "react-router-dom";
 
 const schema = vine.compile(
   vine.object({
@@ -14,7 +14,9 @@ const schema = vine.compile(
 );
 
 const Shipping = () => {
-  const { cart, getTotalPrice, removeItems } = useStore();
+  const { cart, getTotalPrice, removeItemFromCart, updateClientSecret } =
+    useStore();
+  const navigate = useNavigate();
 
   const totalPrice = getTotalPrice();
   console.log(`cart`, JSON.stringify(cart, null, 2));
@@ -22,76 +24,56 @@ const Shipping = () => {
   const { register, handleSubmit, formState, getValues } = useForm({
     resolver: vineResolver(schema),
   });
-  console.log(`formState`, JSON.stringify(formState, null, 2));
 
-  const onSubmit = async() => {
+  console.log(formState, JSON.stringify(formState, null, 2));
+
+  const onSubmit = async () => {
     try {
       const orderItems = cart.map((cartItem) => {
         return {
-          price : cartItem.price,
-          quility:cartItem.quility,
-          productId:cartItem.productId
-        } 
-      })
+          price: cartItem.price,
+          quantity: cartItem.quantity,
+          productId: cartItem.productId,
+        };
+      });
       const { city, state, country } = getValues();
       const deliveryAddress = city + state + country;
-      console.log(`orderItems` , JSON.stringify(orderItems , null,2));
+      console.log(`orderItems`, JSON.stringify(orderItems, null, 2));
       const response = await axiosInstance.post("/order/create", {
         deliveryAddress,
-        totalPrice,
-        orderItems : [...orderItems],
-      })
-      console.log(response.data);
-    } catch (e) {
-      console.log("error on submit",e);
+        totalPrice: getTotalPrice(),
+        orderItems: [...orderItems],
+      });
+      updateClientSecret(response.data.clientSecret);
+      navigate("/checkout");
+    } catch (error) {
+      console.log("error in onSubmit", error);
+      throw error;
     }
   };
 
-  useEffect(() => {
-  },[])
-
   return (
-    <div className="grid grid-cols-2 justify-end items-center m-[0_auto] max-w-[1440px]">
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-4 w-[500px]"
-        id="submit-handler"
-      >
-        <input
-         placeholder="city"
-          {...register("city")}
-          className="border-2 border-black p-1"
-        />
-        <input
-        placeholder="state"
-          {...register("state")}
-          className="border-2 border-black p-1"
-        />
-        <input
-        placeholder="country"
-          {...register("country")}
-          className="border-2 border-black p-1"
-        />
-        <button className="border-2 border-black p-1 w-[200px]" type="submit">
-          Submit
-        </button>
+    <div className="grid grid-cols-2">
+      <form onSubmit={handleSubmit(onSubmit)} id="submit-handler">
+        <input placeholder="city" {...register("city")} />
+        <input placeholder="state" {...register("state")} />
+        <input placeholder="country" {...register("country")} />
+        <button type="submit">submit</button>
       </form>
-
       <div>
-        cart $ {totalPrice}
+        cart ${totalPrice}
         {cart.map((cartItem) => {
           return (
             <div key={cartItem.cartId}>
-              <p>{cartItem.name}</p>
-              <p>{cartItem.price}</p>$ {cartItem.quility} <br />
-              <img src={cartItem.image} alt="" width={40} height={40} />
+              {cartItem.name} {cartItem.price} ${cartItem.quantity}
+              <br />
+              <img src={cartItem.image} width={40} height={40} />
               <button
                 onClick={() => {
-                  removeItems(cartItem.cartId);
+                  removeItemFromCart(cartItem.cartId);
                 }}
-                className="border-black border-2"
               >
-                Remove the Item
+                remove from cart
               </button>
             </div>
           );
@@ -100,4 +82,5 @@ const Shipping = () => {
     </div>
   );
 };
+
 export default Shipping;

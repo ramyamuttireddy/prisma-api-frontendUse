@@ -105,7 +105,7 @@ const Home = () => {
           return (
             <div key={cartItem.cartId}>
               {cartItem.name}
-              {cartItem.price} $ {cartItem.quility}
+              {cartItem.price} $ {cartItem.quantity}
               <button
                 onClick={() => {
                   removeItems(cartItem.cartId);
@@ -171,7 +171,7 @@ const Home = () => {
                           product.id,
                           product.name,
                           product.price,
-                          product.quility,
+                          product.quantity,
                           product.image
                         );
                       }}
