@@ -23,11 +23,11 @@ const CheckoutForm = () => {
   };
     return (
       <div>CheckOut Page  
-        
+        {clientSecret && (
           <Elements stripe={stripePromise} options={options}>
           <CheckoutForm />
          </Elements>
-      
+        )}
       
       </div>  
     )
