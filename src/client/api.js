@@ -3,7 +3,7 @@ import { authToken } from "../store/user";
 
 
 export const axiosInstance = axios.create({
-    baseURL:"http://localhost:3000/",
+    baseURL:"https://prismatas.onrender.com/",
     timeout:10000,
     headers:{"X-Custom-Header" : "Footer"},
   })
