@@ -46,7 +46,7 @@ const CheckoutForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-lg border border-gray-200"
+      className="w-[500px] mx-auto p-8 bg-white rounded-lg shadow-lg border border-gray-200"
     >
       <h2 className="text-xl font-semibold text-center mb-6">
         Complete Your Payment
@@ -78,14 +78,18 @@ const Checkout = () => {
     clientSecret: clientSecret,
   };
   return (
-    <div>
-      CheckOut Page
-      {clientSecret && (
+    <div className="w-full h-full bg-white rounded-lg ">
+    <h1 className="text-2xl font-semibold text-center mb-6">CheckOut Page</h1>
+  
+    {clientSecret && (
+      <div className="flex justify-center items-center">
         <Elements stripe={stripePromise} options={options}>
           <CheckoutForm />
         </Elements>
-      )}
-    </div>
+      </div>
+    )}
+  </div>
+  
   );
 };
 

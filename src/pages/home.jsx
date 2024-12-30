@@ -87,7 +87,7 @@ const Home = () => {
 
   console.log(products);
   return (
-    <div className="container mx-auto p-5">
+    <div className="max-w-[1200px] mx-auto p-5">
       <div className="mb-8">
         {user ? (
           <div className="flex gap-4 items-center">

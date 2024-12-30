@@ -41,10 +41,10 @@ const Product = () => {
           <p className="text-lg font-bold text-gray-700 mb-2">
             {product?.name}
           </p>
-          <p className="text-sm text-gray-600 mb-4">{product?.description}</p>
+          <p className="text-sm text-gray-600 mb-4">{product?.price}</p>
           <button
             onClick={() =>
-              incrementCartItems(product.id, product.name, product.description)
+              incrementCartItems(product.id, product.name)
             }
             className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-200"
           >
