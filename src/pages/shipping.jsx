@@ -14,7 +14,7 @@ const schema = vine.compile(
 );
 
 const Shipping = () => {
-  const { cart, getTotalPrice, removeItemFromCart, updateClientSecret } =
+  const { cart, getTotalPrice, removeItemFromCart ,updateclientSecret } =
     useStore();
   const navigate = useNavigate();
 
@@ -31,21 +31,22 @@ const Shipping = () => {
     try {
       const orderItems = cart.map((cartItem) => {
         return {
+          productId: cartItem.productId, 
           price: cartItem.price,
           quantity: cartItem.quantity,
-          productId: cartItem.productId,
         };
       });
       const { city, state, country } = getValues();
       const deliveryAddress = city + state + country;
       console.log(`orderItems`, JSON.stringify(orderItems, null, 2));
-      const response = await axiosInstance.post("/order/create", {
+      const response = await axiosInstance.post("/orders", {
         deliveryAddress,
         totalPrice: getTotalPrice(),
         orderItems: [...orderItems],
       });
-      updateClientSecret(response.data.clientSecret);
-      navigate("/checkout");
+      console.log(response.data);
+      updateclientSecret(response.data.clientSecret)
+      navigate("/checkout")
     } catch (error) {
       console.log("error in onSubmit", error);
       throw error;
@@ -54,11 +55,29 @@ const Shipping = () => {
 
   return (
     <div className="grid grid-cols-2">
-      <form onSubmit={handleSubmit(onSubmit)} id="submit-handler">
-        <input placeholder="city" {...register("city")} />
-        <input placeholder="state" {...register("state")} />
-        <input placeholder="country" {...register("country")} />
-        <button type="submit">submit</button>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        id="submit-handler"
+        className="flex flex-col gap-3 "
+      >
+        <input
+          placeholder="city"
+          {...register("city")}
+          className="border-2 border-black w-[300px]"
+        />
+        <input
+          placeholder="state"
+          {...register("state")}
+          className="border-2 border-black w-[300px]"
+        />
+        <input
+          placeholder="country"
+          {...register("country")}
+          className="border-2 border-black w-[300px]"
+        />
+        <button type="submit" className="border-2 border-black w-[300px]">
+          submit
+        </button>
       </form>
       <div>
         cart ${totalPrice}

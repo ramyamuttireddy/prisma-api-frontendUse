@@ -12,7 +12,7 @@ const Product = () => {
     try {
         const response = await axiosInstance.get(`/products/${productId}`)
         console.log(response.data.product)
-        setProduct(response.data.product)
+        setProduct(response.data)
     } catch (error) {
        console.log(error) 
     }

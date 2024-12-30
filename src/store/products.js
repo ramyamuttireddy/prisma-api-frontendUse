@@ -7,7 +7,10 @@ const useStore = create(
     persist(
       (set, get) => ({
         cart: [],
-
+        clientSecret:null,
+        updateclientSecret: (clientSecret) => {
+         set({clientSecret})
+        },
         setCart: (cartItems) => {
           const { cart } = get();
           console.log(cart);
@@ -38,7 +41,7 @@ const useStore = create(
               name: name,
               price: price,
               image: image,
-              quility: 1,
+              quantity: 1,
             };
             console.log(image);
             const updatedCart = [...cart, cartItem];
