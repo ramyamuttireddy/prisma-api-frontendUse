@@ -7,27 +7,44 @@ const Cart = () => {
   const totalPrice = getTotalPrice();
   console.log(`cart`, JSON.stringify(cart, null, 2));
   return (
-    <div>
-      <div>
-        cart $ {totalPrice}
-        {cart.map((cartItem) => {
-          return (
-            <div key={cartItem.cartId}>
-              <p>{cartItem.name}</p>
-              <p>{cartItem.price}</p>$ {cartItem.quantity} <br />
-              <img src={cartItem.image} alt="" className="w-40 h-40" />
+    <div className="container mx-auto p-6">
+      <div className="bg-gray-100 p-6 rounded-lg shadow-md">
+        <h2 className="text-xl font-semibold mb-6">
+          Cart Total: ${totalPrice}
+        </h2>
+        <div className="space-y-6">
+          {cart.map((cartItem) => (
+            <div
+              key={cartItem.cartId}
+              className="flex items-center gap-6 bg-white p-4 rounded-lg shadow hover:shadow-lg transition"
+            >
+              <img
+                src={cartItem.image}
+                alt={cartItem.name}
+                className="w-32 h-32 rounded-lg border"
+              />
+              <div className="flex-1">
+                <h3 className="font-bold text-lg">{cartItem.name}</h3>
+                <p className="text-gray-600">Price: ${cartItem.price}</p>
+                <p className="text-gray-600">Quantity: {cartItem.quantity}</p>
+              </div>
               <button
-                onClick={() => {
-                  removeItems(cartItem.cartId);
-                }}
-                className="border-black border-2"
+                onClick={() => removeItems(cartItem.cartId)}
+                className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
               >
-                Remove the Item
+                Remove Item
               </button>
             </div>
-          );
-        })}
-        <Link to={"/shipping"}>Shipping</Link>
+          ))}
+        </div>
+        <div className="mt-6 text-right">
+          <Link
+            to="/shipping"
+            className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600"
+          >
+            Shipping
+          </Link>
+        </div>
       </div>
     </div>
   );

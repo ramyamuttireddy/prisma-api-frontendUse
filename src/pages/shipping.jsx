@@ -14,7 +14,7 @@ const schema = vine.compile(
 );
 
 const Shipping = () => {
-  const { cart, getTotalPrice, removeItemFromCart ,updateclientSecret } =
+  const { cart, getTotalPrice, removeItemFromCart, updateclientSecret } =
     useStore();
   const navigate = useNavigate();
 
@@ -31,7 +31,7 @@ const Shipping = () => {
     try {
       const orderItems = cart.map((cartItem) => {
         return {
-          productId: cartItem.productId, 
+          productId: cartItem.productId,
           price: cartItem.price,
           quantity: cartItem.quantity,
         };
@@ -45,8 +45,8 @@ const Shipping = () => {
         orderItems: [...orderItems],
       });
       console.log(response.data);
-      updateclientSecret(response.data.clientSecret)
-      navigate("/checkout")
+      updateclientSecret(response.data.clientSecret);
+      navigate("/checkout");
     } catch (error) {
       console.log("error in onSubmit", error);
       throw error;
@@ -54,49 +54,69 @@ const Shipping = () => {
   };
 
   return (
-    <div className="grid grid-cols-2">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-6">
       <form
         onSubmit={handleSubmit(onSubmit)}
         id="submit-handler"
-        className="flex flex-col gap-3 "
+        className="flex flex-col gap-4 bg-gray-100 p-6 rounded-lg shadow-md"
       >
+        <h2 className="text-xl font-bold mb-4 text-gray-700">Enter Address</h2>
         <input
-          placeholder="city"
+          placeholder="City"
           {...register("city")}
-          className="border-2 border-black w-[300px]"
+          className="border border-gray-300 p-2 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
         />
         <input
-          placeholder="state"
+          placeholder="State"
           {...register("state")}
-          className="border-2 border-black w-[300px]"
+          className="border border-gray-300 p-2 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
         />
         <input
-          placeholder="country"
+          placeholder="Country"
           {...register("country")}
-          className="border-2 border-black w-[300px]"
+          className="border border-gray-300 p-2 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
         />
-        <button type="submit" className="border-2 border-black w-[300px]">
-          submit
+        <button
+          type="submit"
+          className="bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300"
+        >
+          Submit
         </button>
       </form>
-      <div>
-        cart ${totalPrice}
-        {cart.map((cartItem) => {
-          return (
-            <div key={cartItem.cartId}>
-              {cartItem.name} {cartItem.price} ${cartItem.quantity}
-              <br />
-              <img src={cartItem.image} width={40} height={40} />
+
+      <div className="bg-white p-6 rounded-lg shadow-md">
+        <h2 className="text-xl font-bold mb-4 text-gray-700">Cart Summary</h2>
+        <p className="text-lg mb-4">
+          <span className="font-semibold">Total Price:</span> ${totalPrice}
+        </p>
+        <div className="space-y-4">
+          {cart.map((cartItem) => (
+            <div
+              key={cartItem.cartId}
+              className="flex items-center justify-between bg-gray-100 p-4 rounded-md shadow-sm"
+            >
+              <div className="flex items-center gap-4">
+                <img
+                  src={cartItem.image}
+                  alt={cartItem.name}
+                  className="w-16 h-16 object-cover rounded-md"
+                />
+                <div>
+                  <p className="font-semibold text-gray-800">{cartItem.name}</p>
+                  <p className="text-sm text-gray-600">
+                    ${cartItem.price} x {cartItem.quantity}
+                  </p>
+                </div>
+              </div>
               <button
-                onClick={() => {
-                  removeItemFromCart(cartItem.cartId);
-                }}
+                onClick={() => removeItemFromCart(cartItem.cartId)}
+                className="text-red-500 border border-red-500 px-3 py-1 rounded hover:bg-red-100"
               >
-                remove from cart
+                Remove
               </button>
             </div>
-          );
-        })}
+          ))}
+        </div>
       </div>
     </div>
   );
