@@ -184,7 +184,7 @@ const Home = () => {
                       product.image
                     )
                   }
-                  className="bg-blue-500 text-white px-3 py-2 rounded hover:bg-blue-600"
+                  className="bg-orange-400 text-white px-3 py-2 rounded hover:bg-amber-600"
                 >
                   +
                 </button>
