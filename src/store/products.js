@@ -82,6 +82,11 @@ const useStore = create(
           return totalCount;
         },
 
+        resetCart: () => {
+       
+          set({cart :[]})
+         },
+
         removeItems: (id) => {
           const { cart } = get();
           const FlilterItem = cart.filter((item) => item.cartId !== id);
