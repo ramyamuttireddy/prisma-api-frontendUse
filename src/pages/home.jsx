@@ -105,13 +105,14 @@ const Home = () => {
           {products.map((product) => (
             <div
               key={product.id}
-              className="border border-gray-300 rounded-lg  shadow hover:shadow-lg transition duration-300 justify-center"
+              className="border border-gray-300 rounded-lg shadow hover:shadow-lg transition duration-300 justify-center"
             >
               <Link to={`products/${product.id}`}>
                 <img
                   src={product.image}
                   alt={product.name}
                   className="w-full h-60 object-cover"
+                  loading="lazy" // Lazy loading added here
                 />
               </Link>
               <div className="p-4">
