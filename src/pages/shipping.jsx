@@ -100,6 +100,7 @@ const Shipping = () => {
                   src={cartItem.image}
                   alt={cartItem.name}
                   className="w-16 h-16 object-cover rounded-md"
+                  loading="lazy"
                 />
                 <div>
                   <p className="font-semibold text-gray-800">{cartItem.name}</p>

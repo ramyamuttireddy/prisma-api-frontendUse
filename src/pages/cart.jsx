@@ -22,6 +22,7 @@ const Cart = () => {
                 src={cartItem.image}
                 alt={cartItem.name}
                 className="md:w-32 md:h-32 rounded-lg border"
+                loading="lazy"
               />
               <div className="flex-1">
                 <h3 className="font-bold text-lg">{cartItem.name}</h3>
