@@ -43,9 +43,7 @@ const Product = () => {
           </p>
           <p className="text-sm text-gray-600 mb-4">{product?.price}</p>
           <button
-            onClick={() =>
-              incrementCartItems(product.id, product.name)
-            }
+            onClick={() => incrementCartItems(product.id, product.name)}
             className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-200"
           >
             Add Product to Cart

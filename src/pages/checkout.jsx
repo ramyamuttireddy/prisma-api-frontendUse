@@ -79,17 +79,16 @@ const Checkout = () => {
   };
   return (
     <div className="w-full h-full bg-white rounded-lg ">
-    <h1 className="text-2xl font-semibold text-center mb-6">CheckOut Page</h1>
-  
-    {clientSecret && (
-      <div className="flex justify-center items-center">
-        <Elements stripe={stripePromise} options={options}>
-          <CheckoutForm />
-        </Elements>
-      </div>
-    )}
-  </div>
-  
+      <h1 className="text-2xl font-semibold text-center mb-6">CheckOut Page</h1>
+
+      {clientSecret && (
+        <div className="flex justify-center items-center">
+          <Elements stripe={stripePromise} options={options}>
+            <CheckoutForm />
+          </Elements>
+        </div>
+      )}
+    </div>
   );
 };
 

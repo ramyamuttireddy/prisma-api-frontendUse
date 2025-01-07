@@ -28,63 +28,11 @@ const Home = () => {
     }
   };
 
-  // const backEndApI = async() => {
-  //   try{
-
-  //     const response = await axios("http://localhost:3000/products")
-  //     const ProductsData = [...response.data.products]
-  //     setProducts(ProductsData)
-
-  //   }catch(err){
-  //     console.log("error on APT")
-  //   }
-  // }
-
   useEffect(() => {
     fetchData();
   }, []);
 
   const totalPrice = getTotalPrice();
-
-  // function incrementCartItems(id, title, price, quility) {
-  //   const existingCardItem = cart.find((cartItem) => cartItem.productId === id);
-  //   if (existingCardItem) {
-  //     const updatedCart = cart.map((cartItem) => {
-  //       if (cartItem.productId === id) {
-  //         return {
-  //           ...cartItem,
-  //           quility: cartItem.quility + 1,
-  //         }
-  //       }
-  //       return cartItem;
-  //     })
-  //     setCart(updatedCart)
-  //   } else {
-  //     const cartItem = {
-  //       cartId: "cart" + Math.random(),
-  //       productId: id,
-  //       name: title,
-  //       price: price,
-  //       quility: 1,
-  //     }
-  //     const updatedCart = [...cart, cartItem]
-  //     setCart(updatedCart)
-  //   }
-  // }
-
-  // function decrementCartItems(id) {
-  //   const updatedCart = cart.map((cartItem) => {
-  //     if (cartItem.productId === id && cartItem.quility > 0) {
-  //       return {
-  //         ...cartItem,
-  //         quility: Math.max(cartItem.quility - 1, 0),
-  //       };
-  //     }
-  //     return cartItem;
-  //   });
-
-  //   setCart(updatedCart);
-  // }
 
   console.log(products);
   return (
@@ -95,8 +43,8 @@ const Home = () => {
             <div className="flex gap-4 items-center">
               <button
                 onClick={() => {
-                  resetCart()
-                  logOut()
+                  resetCart();
+                  logOut();
                 }}
                 className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
               >

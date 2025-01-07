@@ -7,9 +7,9 @@ const useStore = create(
     persist(
       (set, get) => ({
         cart: [],
-        clientSecret:null,
+        clientSecret: null,
         updateclientSecret: (clientSecret) => {
-         set({clientSecret})
+          set({ clientSecret });
         },
         setCart: (cartItems) => {
           const { cart } = get();
@@ -83,9 +83,8 @@ const useStore = create(
         },
 
         resetCart: () => {
-       
-          set({cart :[]})
-         },
+          set({ cart: [] });
+        },
 
         removeItems: (id) => {
           const { cart } = get();
