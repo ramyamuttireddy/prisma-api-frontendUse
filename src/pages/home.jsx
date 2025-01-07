@@ -112,7 +112,6 @@ const Home = () => {
                   src={product.image}
                   alt={product.name}
                   className="w-full h-60 object-cover"
-                  loading="lazy"
                 />
               </Link>
               <div className="p-4">
