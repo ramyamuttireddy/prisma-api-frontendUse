@@ -16,12 +16,12 @@ const Cart = () => {
           {cart.map((cartItem) => (
             <div
               key={cartItem.cartId}
-              className="flex items-center gap-6 bg-white p-4 rounded-lg shadow hover:shadow-lg transition"
+              className="flex flex-col md:flex-row items-center gap-6 bg-white p-4 rounded-lg shadow hover:shadow-lg transition "
             >
               <img
                 src={cartItem.image}
                 alt={cartItem.name}
-                className="w-32 h-32 rounded-lg border"
+                className="md:w-32 md:h-32 rounded-lg border"
               />
               <div className="flex-1">
                 <h3 className="font-bold text-lg">{cartItem.name}</h3>
